@@ -1,0 +1,94 @@
+﻿<p *ngIf="!books"><em>Loading...</em></p>
+<h2>Books</h2>
+<input type="button" value="Create new" class="btn btn-default" (click)="addBook()" />
+
+<div>{{statusMessage}}</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Authors</td>
+            <td>Year</td>
+            <td>Publishing</td>
+            <td>Pages</td>
+            <td>Type of Publish</td>
+            <td>Cost</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <ng-template [ngTemplateOutlet]="loadTemplate(book)"
+                         [ngOutletContext]="{ $implicit: book}">
+            </ng-template>
+        </tr>
+    </tbody>
+</table>
+
+<!--readonly template-->
+<ng-template #readOnlyTemplate let-book>
+    <td>{{book.name}}</td>
+    <td>{{book.author}}</td>
+    <td>{{book.year}}</td>
+    <td>{{book.pubHouse}}</td>
+    <td>{{book.pageCount}}</td>
+    <td>{{book.genre.name}}</td>
+    <td>{{book.cost}}</td>
+    <td>
+        <input type="button" value="Edit" class="btn btn-default" (click)="onSelect(book)" />
+    </td>
+    <td>
+        <input type="button" value="Delete" (click)="deleteBook(book)" class="btn btn-danger" />
+    </td>
+</ng-template>
+
+<!--write template-->
+<ng-template #editTemplate>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.name" placeholder="name" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.author" placeholder="authors" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.year" placeholder="year" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.pubHouse" placeholder="publishing house" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.pageCount" placeholder="number of pages" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.genre.name" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editedBook.cost" placeholder="USD" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Save" (click)="saveBook()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+    </td>
+</ng-template>
+
+<!--<div>
+    <button kendoButton [primary]="true">Create new</button>
+</div>
+
+<kendo-grid [data]="books" [height]="200" class="table table-striped">
+    <kendo-grid-column field="name" title="Name" width="250">
+    </kendo-grid-column>
+    <kendo-grid-column field="author" title="Authors" width="150">
+    </kendo-grid-column>
+    <kendo-grid-column field="pubHouse" title="Publishing" width="150">
+    </kendo-grid-column>
+    <kendo-grid-column field="year" title="Year" width="80">
+    </kendo-grid-column>
+    <kendo-grid-column field="pageCount" title="Pages" width="80">
+    </kendo-grid-column>
+    <kendo-grid-column field="genre.name" title="Type of Publish" width="100">
+    </kendo-grid-column>
+    <kendo-grid-column field="cost" title="Cost" width="80">
+    </kendo-grid-column>
+</kendo-grid>-->

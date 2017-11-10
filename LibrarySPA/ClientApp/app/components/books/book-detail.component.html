@@ -1,0 +1,15 @@
+﻿<div *ngIf="book">
+    <p class="text-info">{{book.name}} detail:</p>
+    <div>
+        <p>
+            <label>Publishing house: </label>{{book.pubHouse}}
+        </p>
+        <p><label>Pages: </label>{{book.pageCount}}</p>
+        <p><label>Type of Publish: </label>{{book.genre.name}}</p>
+        <br />
+        <p>
+            <label>About the publication: </label>
+            {{book.description}}
+        </p>
+    </div>
+</div>

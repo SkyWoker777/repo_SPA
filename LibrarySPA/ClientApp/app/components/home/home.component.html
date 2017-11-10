@@ -1,0 +1,28 @@
+
+<h2 class="text-primary">Overview of goods</h2>
+<hr />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Authors</td>
+            <td>Year</td>
+            <td>Cost</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+            <td>{{book.cost}}</td>
+            <td>
+                <button class="btn btn-default" (click)="onDetails(book); $event.stopPropagation()">
+                    more info >
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<book-detail [book]="selectedBook"></book-detail>
